@@ -1,0 +1,12 @@
+curl -X POST \
+  http://10.96.88.219:9999/api/createDigitalAccessCard \
+  -H 'Authorization: c8f06001-bf5a-46b3-afd75f-f5677769fc6c' \
+  -H 'Content-Type: application/json' \
+  -H 'accept-encoding: gzip, deflate' \
+  -d '{
+  "property_id": 4817,
+  "email_address": "ameena@emaar.com",
+  "first_name": "Arun",
+  "last_name": "Meena",
+  "device_id": "123"
+}'

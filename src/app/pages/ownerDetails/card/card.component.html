@@ -1,0 +1,62 @@
+<nb-card >
+	<nb-card-body style="width: 800px">
+		<form>
+			<div *ngIf="type=='owner'" class="form-group">
+				<label for="name">Name</label>
+				<input type="text" #name id="name" (change)="check($event)" class="form-control" #name value="{{cardToEdit.name}}">
+			</div>
+			<div class="row">
+				<div class="col-xl" *ngFor="let file of cardToEdit.files">
+					<a href="/api/units/get_images/{{cardToEdit.unit_id}}/{{file.id}}/{{file.ext}}"
+						[attr.data-lightbox]="cardToEdit.id">
+						<img src="/api/units/get_images/{{cardToEdit.unit_id}}/{{file.id}}/{{file.ext}}"
+							style="width:200px ;height: 150px; margin-bottom: 10px ; " />
+					</a>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="reson">Reason</label>
+				<textarea #reason type="text" id="reson" class="form-control"></textarea>
+			</div>
+			<div class="row">
+				<div *nbIsGranted="['abilities', 'print']" class="col-xl" style="text-align: center !important">
+					<span>Print</span><br>
+					<input #printed type="checkbox" class="radio" style="margin-top: 8px !important"
+						[checked]="cardToEdit.printed" data-md-icheck (change)="check($event)" id='printCheckbox'>
+				</div>
+				<div *nbIsGranted="['abilities', 'activate']" class="col-xl" style="text-align: center !important">
+					<span>Activate</span><br>
+					<input type="checkbox" class="radio" style="margin-top: 8px !important">
+				</div>
+				<div *nbIsGranted="['abilities', 'blacklist']" class="col-xl" style="text-align: center !important">
+					<span>BlackList</span><br>
+					<input type="checkbox" class="radio" style="margin-top: 8px !important">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xl" style="text-align: center !important">
+					<button nbButton status="success" style="padding: 5px ; margin-top: 50px" (click)="save()">Save</button>
+				</div>
+				<div class="col-xl" style="text-align: center !important">
+					<button nbButton status="danger" style="padding: 5px ; margin-top: 50px" (click)="cancel()">Cancel</button>	
+				</div>
+			</div>
+		</form>
+	</nb-card-body>
+</nb-card>
+
+<!-- <nb-card *ngIf="stat">
+	<nb-card-body style="width:400px">
+		<form>
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" id="name" class="form-control" #name>
+			</div>
+			<div class="form-group">
+				Your image :<input type="file">
+			</div>
+			<button nbButton status="success" style="padding: 5px ; margin-top: 50px"
+				(click)="save(name.value,ischeaked)">Save</button>
+		</form>
+	</nb-card-body>
+</nb-card> -->

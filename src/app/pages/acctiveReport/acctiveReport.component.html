@@ -1,0 +1,40 @@
+<button nbButton (click)="getData()" style="margin-bottom:3%">Generate Report</button>
+
+  <div *ngIf="show">
+    <div>
+      <h2>All Units</h2>
+      <h4 id='pdfUnit'>Number of Units : {{allUnitsNumber}}</h4>
+      <button nbButton (click)="getpdf('pdfUnit')">Export</button>
+      <hr style="border-top: 4px solid "> 
+   </div>
+    <!--  --> 
+    <div>
+      <h2>Activated Owners Card</h2>
+      <h4 id="pdfOwnerCard">Number of Card : {{activedOwnerNumber}}</h4>
+      <button nbButton (click)="getpdf('pdfOwnerCard')">Export</button>
+        <hr style="border-top: 4px solid ">
+    </div>
+      <!--  --> 
+     <div> 
+      <h2>Activated Guests Card </h2>
+      <h4 id="pdfGust">Number of Card : {{activedGuestNumber}}</h4>
+      <button nbButton (click)="getpdf('pdfGust')">Export</button>
+        <hr style="border-top: 4px solid ">
+      </div>  
+      <!--  --> 
+
+      <div>
+         <h2>Activated Guests ExtraCard </h2>
+        <h4 id="pdfExtra">Number of Card : {{activedExtraGuestNumber}}</h4>
+        <button nbButton (click)="getpdf('pdfExtra')">Export</button>
+        <hr style="border-top: 4px solid ">
+      </div>
+        <!--  -->
+       <div> 
+        <h2>Activated houseHold Card</h2>
+        <h4 id="pdfHouseHold">Number of Card : {{activedHouseHoldNumber}}</h4>
+        <button style="margin-bottom: 10px" nbButton (click)="getpdf('pdfHouseHold')">Export</button>
+        
+      </div>
+  </div>
+

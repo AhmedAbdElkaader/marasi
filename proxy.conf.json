@@ -1,0 +1,9 @@
+{
+    "/api/*": {
+      "target": "https://ef351350.ngrok.io",
+      "secure": false,
+      "logLevel": "debug"
+    }
+  }
+
+

@@ -1,0 +1,105 @@
+  
+  
+     <nb-card style="margin-top:30px ">
+      <nb-card-header style="font-size: 2.0rem ; margin: 10px">
+        <div class="row" style="text-align: center" >
+            <div class="col-xl ">
+                <i (click)="toggle()" class={{icon}} style="font-size: 40px;margin:5px 0 10px 0 "></i>
+             </div>
+          <div class="col-xl">
+            <button nbButton #generateButton (click)="generateCrads()" nbSpinnerStatus="success" nbSpinnerSize="large"
+              nbSpinnerMessage="">Generate Cards</button>
+          </div>
+          <div class="col-xl">
+              <button nbButton #extraGenerateButton (click)="generateExtraCards()" nbSpinnerStatus="success" nbSpinnerSize="large"
+                nbSpinnerMessage="">Generate Extra Cards</button>
+          </div>
+          <div class="col-xl " *nbIsGranted="['abilities', 'print']">
+            <button nbButton #printAllButton nbSpinnerStatus="success" (click)="printAll()"
+              [nbSpinner]="loadingLargeGroup" nbSpinnerSize="large" nbSpinnerMessage="">Print All</button>
+          </div>
+        </div>
+      </nb-card-header>
+    </nb-card>
+
+
+ 
+    <div class="row">
+      <div class="col-xl-4">
+          <div class="accordions-container row">
+              <nb-accordion multi #accordionOwners>
+                <nb-accordion-item #accordionItems *ngFor="let guestCard of guestCardsList; let i = index">
+                  <nb-accordion-item-header style="font-size: 1.5rem ; margin: 10px" *ngIf="!guestCard.extra;">
+                    {{ guestCard.id.toString().padStart(6,"0") }}
+                    <button nbButton (click)=convertToOwenr()>Convert to Owner</button>
+                  </nb-accordion-item-header>
+                  <nb-accordion-item-header style="font-size: 1.5rem ; margin: 10px" *ngIf="guestCard.extra;">
+                    {{ guestCard.id.toString().padStart(6,"0") }}
+                    <span >
+                         - Extra
+                    </span>
+                  </nb-accordion-item-header>
+                  <nb-accordion-item-body>
+                    <div class="row">
+                      <div class="col-xl" *nbIsGranted="['abilities', 'print']">
+                        <button nbButton #printButtons [disabled]="guestCard.printed" (click)="printCard(i)"
+                          [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success" nbSpinnerSize="large"
+                          nbSpinnerMessage="">Print</button>
+                      </div>
+                      <div class="col-xl" *nbIsGranted="['abilities', 'activate']">
+                        <button nbButton #activateButtons status="success" [disabled]="guestCard.activated" (click)="activateCard(i)"
+                          [nbSpinner]="loadingLargeGroupActivate" nbSpinnerStatus="success" nbSpinnerSize="large"
+                          nbSpinnerMessage="">Activate</button>
+                      </div>
+                      <div class="col-xl" *nbIsGranted="['abilities', 'blacklist']">
+                        <button nbButton status="warning" [disabled]="guestCard.black_listed">Black Listed</button>
+                      </div>
+                      <div class="col-xl " style="margin-top: 5px">
+                        <button nbButton status="danger" (click)="openWindow(i)">Edit</button>
+                      </div>
+                    </div>
+                  </nb-accordion-item-body>
+                </nb-accordion-item>
+              </nb-accordion>
+            </div>            
+      </div>
+      <!-- <div class="clo-xl">
+          <div class="row">
+              <div class="col-xl">
+                  <div class="accordions-container row">
+                      <nb-accordion multi #accordionOwners>
+                        <nb-accordion-item  *ngFor="let guestCard of guestCardsList; let i = index">
+                         
+                          <nb-accordion-item-body>
+                            <div class="row">
+                              <div class="col-xl" *nbIsGranted="['abilities', 'print']">
+                                <button nbButton #printButtons [disabled]="guestCard.printed" (click)="printCard(i)"
+                                  [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success" nbSpinnerSize="large"
+                                  nbSpinnerMessage="">Print</button>
+                              </div>
+                              <div class="col-xl" *nbIsGranted="['abilities', 'activate']">
+                                <button nbButton #activateButtons status="success" [disabled]="guestCard.activated" (click)="activateCard(i)"
+                                  [nbSpinner]="loadingLargeGroupActivate" nbSpinnerStatus="success" nbSpinnerSize="large"
+                                  nbSpinnerMessage="">Activate</button>
+                              </div>
+                              <div class="col-xl" *nbIsGranted="['abilities', 'blacklist']">
+                                <button nbButton status="warning" [disabled]="guestCard.black_listed">Black Listed</button>
+                              </div>
+                              <div class="col-xl " style="margin-top: 5px">
+                                <button nbButton status="danger" (click)="openWindow(i)">Edit</button>
+                              </div>
+                            </div>
+                          </nb-accordion-item-body>
+                        </nb-accordion-item>
+                      </nb-accordion>
+                    </div>
+              </div>
+            </div>
+      </div> -->
+    </div>
+
+
+
+
+
+

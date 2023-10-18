@@ -1,0 +1,5 @@
+<div *ngIf="unitId > 0">
+    <textarea style="height: 200px" nbInput #inputRf fullWidth placeholder="Textarea" (input)="somethingChanged($event)"></textarea>
+    <button nbButton (click)="save()">Save</button>
+</div>
+

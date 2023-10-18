@@ -1,0 +1,153 @@
+
+
+
+.card{
+    width:506px;
+    height:319px;
+    border: black solid 1px;
+    margin:0 auto ;
+    position: relative;
+    background: none
+}
+
+.gust{
+    width:135px;
+    height:155px;
+    position: absolute;
+    left:29px;
+    top:50px;
+
+}
+
+.cardData{
+    position:absolute ;
+    top:50px;
+    left:-45px;
+    font-size:9px;
+}
+.cardData{
+    -ms-transform: rotate(-90deg); /* IE 9 */
+    -webkit-transform: rotate(-90deg); /* Safari 3-8 */
+    transform: rotate(-90deg);
+}
+.title{
+    position: absolute;
+    top:50px;
+    left:181px;
+    
+}
+/* .title,.date h6{
+    margin: 0;
+    padding: 0
+} */
+
+
+ .card div #name{
+    font-family:"Praxis-Light" !important;
+    font-size:17px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0
+}
+.card div #addres{
+    font-family:"Praxis-Bold";
+    font-size:17px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0
+}
+
+.date{
+    position: absolute;
+    top:173px;
+    left:181px;
+}
+
+.card div #valid{
+    font-family:"Praxis-Light" !important;
+    font-size:13px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0
+}
+
+.card div #data{
+    font-family:"Praxis-Bold" !important;
+    font-size:13px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0
+}
+
+
+
+.emaarMisr{
+    position: absolute;
+    bottom:26px;
+    right:17px;
+}
+
+
+.emaarMisr #mob{
+
+    font-family:"Praxis-Light";
+    font-size:20px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0
+}
+
+.emaarMisr #site{
+
+    font-family:"Praxis-Bold";
+    font-size:14px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0
+}
+
+
+.footer{
+    position: absolute;
+    bottom:26px;
+    left:29px;
+
+}
+
+.footer h6{
+    font-family:"Praxis-Light" !important;
+    font-size:10px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0
+}
+
+
+.logo{
+    position: absolute;
+    bottom: 26px;
+    right:211px
+}
+
+#logo{
+    width:84px;
+    height: 18px;
+}
+
+.navbar-toggler {
+    color: nb-theme(color-fg-highlight);
+}

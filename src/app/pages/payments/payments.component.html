@@ -1,0 +1,44 @@
+<!-- <div class="col-md-12 col-lg-6 col-xxxl-6">
+  <nb-card class="list-card" size="small">
+    <nb-card-header>Outstanding Balance</nb-card-header>
+    <nb-list>
+        <nb-list-item *ngFor="let unpaid of unpaid">
+            <nb-checkbox status="success" (change)="onChecked($event)">
+                <label>Rent from: {{ unpaid.rent_from }}</label><br>
+                <label>Rent To: {{ unpaid.rent_to }}</label><br>
+                <label>Amount: {{ unpaid.amount }}</label><br>
+                </nb-checkbox>
+        </nb-list-item>
+      </nb-list>
+  </nb-card> -->
+
+  <div class="col-md-12 col-lg-6 col-xxxl-6">
+      <nb-card class="list-card">
+        <nb-card-header>Outstanding Balance</nb-card-header>
+        <nb-list>
+            <nb-list-item *ngFor="let unpaid of unpaids">
+              <label>Rent from: {{ unpaid.rent_from }}</label><br>
+              <label>Rent To: {{ unpaid.rent_to }}</label><br>
+              <label>Amount: {{ unpaid.amount }}</label><br>
+              <div class="btn-group">
+                    <button type="button" (click)="putIntoField(unpaid.id)" class="btn btn-primary">
+                      <i class="fa fa-save"></i>
+                    </button>
+                    <!-- <button  class="btn btn-primary"></button> -->
+                  </div>
+            </nb-list-item>
+          </nb-list>
+      </nb-card>
+ 
+
+  <nb-card class="list-card" size="small">
+    <nb-card-header>Covered Balance</nb-card-header>
+    <nb-list>
+      <nb-list-item *ngFor="let paid of paids">
+              <label>Rent from: {{ paid.rent_from }}</label><br>
+              <label>Rent To: {{ paid.rent_to }}</label><br>
+              <label>Amount: {{ paid.amount }}</label><br>
+      </nb-list-item>
+    </nb-list>
+  </nb-card>
+</div>

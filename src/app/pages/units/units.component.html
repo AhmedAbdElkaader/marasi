@@ -1,0 +1,104 @@
+<div class="row" col-sm-12 col-md-6 col-lg-6 col-xxxl-6>
+    <div class="col-lg-4">
+        <nb-card>
+            <nb-card-header>Find Unit</nb-card-header>
+            <nb-card-body>
+                <div class="row full-name-inputs">
+                    <div class="col-sm-6 input-group">
+                        <input type="text" [formControl]="queryField" placeholder="Please Enter Name or Unit"
+                            class="form-control" [(ngModel)]="ownername" name="ownername" autofocus />
+                    </div>
+                </div>
+                <div class="row full-name-inputs">
+                    <nb-list>
+                        <nb-list-item *ngFor="let owner of ownersSearchResult" (click)="putIntoField(owner.id)">
+                            {{ owner.unitFullName }}
+                        </nb-list-item>
+                    </nb-list>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+    <div class="col-lg-2">
+        <status-card #socketCard 
+        [title]="socketCardData.title"
+        [type]="socketCardData.type"
+        [clickable]="socketCardData.clickable">
+        <i [ngClass]="socketCardData.iconClass"></i>
+        </status-card>
+    </div>   
+    <div class="col-lg-2">
+        <status-card #printerCard   
+                [title]="printerCardData.title"
+                [type]="printerCardData.type"
+                [clickable]="printerCardData.clickable">
+            <i [ngClass]="printerCardData.iconClass"></i>
+        </status-card>
+    </div>
+</div>
+
+<div class="accordions-container row">
+    <div class="col-xl-12">
+        <nb-card>
+            <nb-card-header style="font-size: 2.0rem ; margin: 10px">{{ selectedUnitName }}</nb-card-header>
+            <nb-card-body>
+                <nb-tabset fullWidth (changeTab)="toggleLoadingAnimation()">
+                    <nb-tab tabTitle="Owner" [nbSpinner]="loading" nbSpinnerStatus="success" nbSpinnerSize="xxlarge">
+                        <owner [unitId]="unitId" [selectedOwnersList]="selectedOwnersList"></owner>
+                    </nb-tab>
+
+                    <nb-tab tabTitle="Guest" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="xxlarge">
+                        <guest-cards [unitId]="unitId" [unitName]="selectedUnitName" [guestCardsList]="guestCardsList">
+                            
+                        </guest-cards>
+                    </nb-tab>
+
+                    <nb-tab tabTitle="Household" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="xxlarge">
+                        <household [unitId]="unitId" [unitName]="selectedUnitName" [selectedHHList]="hhList"></household>
+                    </nb-tab>
+
+                    <nb-tab tabTitle="Rentals" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="xxlarge">
+                        <rentals [unitId]="unitId"  [unitName]="selectedUnitName" [rentalsList]="rentalsList"></rentals>
+                    </nb-tab>
+
+                    <nb-tab tabTitle="Document" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="xxlarge">
+                        <div *ngFor="let document of unitDocuments" style="float: left">
+                            <a href="/api/units/get_images/{{document.unit_id}}/{{document.id}}/{{document.ext}}"
+                                data-lightbox="roadtrip">
+                                <img src="/api/units/get_images/{{document.unit_id}}/{{document.id}}/{{document.ext}}"
+                                    style="width: 200px ; height: 200px ;margin: 10px ; border-radius: 20px" />
+                            </a>
+                        </div>
+                    </nb-tab>
+                    <nb-tab tabTitle="RFID">
+                           <rfid [unitId]="unitId" [resultRfId]="resultRfId" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="xxlarge"></rfid>
+                    </nb-tab>
+                    <!-- <nb-tab tabTitle="Rental" [nbSpinner]="loading" nbSpinnerStatus="info" nbSpinnerSize="xxlarge">
+                        <br>
+                        <input nbInput [ngModel] ="selectedDate | date:'dd/MM/yyyy'"
+                            name="selectedDate"
+                            (ngModelChange)="selectDate($event)"
+                            placeholder="Rent From"
+                            [nbDatepicker]="formpicker1">
+                        <nb-datepicker #formpicker1></nb-datepicker>
+                        {{selectedtDate}}
+                        <br>
+                        <br>
+                        <input nbInput [(ngModel)]="selectedDate2"
+                            name="selectedDate2"
+                            (ngModelChange)="selectDate2($event)"
+                            placeholder="Rent To"
+                            [nbDatepicker]="formpicker2">
+                        <nb-datepicker #formpicker2></nb-datepicker>
+                        {{myDate2 | date:'dd-MM-yyyy'}}
+                    <br>
+                    <br>
+                        <button (click)="putIntoRentalField(unitId)" class="btn btn-primary">Save</button>
+                    </nb-tab> -->
+                    
+                </nb-tabset>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+

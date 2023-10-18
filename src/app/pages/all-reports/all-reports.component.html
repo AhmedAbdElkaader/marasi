@@ -1,0 +1,109 @@
+<nb-card>
+  <nb-card-header>
+    <h2>Reports </h2>
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row" style="margin-bottom: 5%">
+      <div class="col">
+        <nb-select placeholder="Main Gates" [(selected)]="selectedOptionMainGate">
+          <nb-option *ngFor="let item of mainGats ; let i = index" value="{{i}}" (click)="selectGate(i,item.id)">
+            {{item.name}}
+          </nb-option>
+        </nb-select>
+      </div>
+      <div class="col">
+        <nb-select placeholder="beaches" [(selected)]="selectedOptionbeachGate">
+          <nb-option value="{{i}}" (click)="selectBeach(i,item.id)" *ngFor="let item of beaches ; let i = index">
+            {{item.name}}</nb-option>
+        </nb-select>
+      </div>
+      <div class="col">
+        <nb-select placeholder="village" [(selected)]="selectedOptionVailgGate">
+          <nb-option value="{{i}}" (click)="selectVilage(i,item.id)" *ngFor="let item of villages ; let i = index">
+            {{item.name}}</nb-option>
+        </nb-select>
+      </div>
+    </div>
+
+    <div *ngIf="showButtons">
+      <button (click)="getAllUnits()" nbButton style="margin: 10px">All Units</button>
+      <button (click)="getSingleUnit()" nbButton>Single Uinit</button>
+    </div>
+
+    <nb-card *ngIf="showSearcForUnit">
+      <nb-card-header>Find Unit</nb-card-header>
+      <nb-card-body>
+          <div class="row full-name-inputs">
+              <div class="col-sm-6 input-group">
+                  <input type="text" [formControl]="queryField" placeholder="Please Enter Name or Unit"
+                      class="form-control" [(ngModel)]="ownername" name="ownername" autofocus />
+              </div>
+          </div>
+          <div class="row full-name-inputs">
+              <nb-list>
+                  <nb-list-item *ngFor="let unit of ownersSearchResult" style="cursor: pointer"
+                  (click)="putIntoField(unit.id, unit.unitFullName)">
+                      {{ unit.unitFullName }} 
+                  </nb-list-item>
+              </nb-list>
+          </div>
+      </nb-card-body>
+  </nb-card>
+
+  <h3>{{unitName}}</h3>
+
+    <nb-card *ngIf="showControl">
+      <nb-card-body>
+        <nb-radio-group [(ngModel)]="option">
+          <nb-radio value="0">All</nb-radio>
+          <nb-radio value="1">Digital Accases BLE</nb-radio>
+          <nb-radio value="2">Digital Accases Nfc</nb-radio>
+          <nb-radio value="3">Bar Code</nb-radio>
+          <nb-radio value="5">Mifare</nb-radio>
+          <nb-radio value="6">Desfire</nb-radio>
+          <nb-radio value="7">ISO15693</nb-radio>
+          <nb-radio value="8">HID iCLASS</nb-radio>
+          <nb-radio value="10">RFID</nb-radio>
+        </nb-radio-group>
+      </nb-card-body>
+    </nb-card>
+
+    <nb-card *ngIf="showControlSingleUnit">
+      <nb-card-body>
+        <nb-radio-group [(ngModel)]="option2">
+          <nb-radio value="0">All</nb-radio>
+          <nb-radio value="1">Owners</nb-radio>
+          <nb-radio value="2">Gustes</nb-radio>
+          <nb-radio value="3">House Hold</nb-radio>
+        </nb-radio-group>
+      </nb-card-body>
+    </nb-card>
+
+
+    <div class="row" *ngIf="showDate">
+      <div class="col-6">
+        <form [formGroup]="form">
+          <div class="form-group">
+            <label for="number">Start Date</label>
+            <input class="form-control" nbInput [nbDatepicker]="formpicker" formControlName="currentStartDate"
+              shape="semi-round" fieldSize="giant">
+            <nb-datepicker #formpicker format="dd/MM/yyyy"></nb-datepicker>
+          </div>
+          <div class="form-group">
+            <label>End Date</label>
+            <input class="form-control" nbInput [nbDatepicker]="former" formControlName="currentEndDate"
+              shape="semi-round" fieldSize="giant">
+            <nb-datepicker #former format="dd/MM/yyyy"></nb-datepicker>
+          </div>
+        </form>
+        <button nbButton (click)="getReport()">Show Report</button>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<nb-card *ngIf="showtable"> 
+  <nb-card-body>
+      <ng2-smart-table [settings]="settings" [source]="ReportsArr"></ng2-smart-table>  
+  </nb-card-body>
+</nb-card>

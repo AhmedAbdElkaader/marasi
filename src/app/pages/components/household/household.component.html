@@ -1,0 +1,56 @@
+<nb-card style="margin-top:30px ">
+    <nb-card-header >
+        <i *ngIf="unitId>0" (click)="toggle()" class={{icon}} style="font-size: 40px;margin:5px 0 10px 0 ; cursor: pointer;"></i>
+    </nb-card-header>
+    <nb-card-body>
+      <div *ngIf="unitId>0" class="row">
+        <div class="col-xl">
+                <fileupload [rentalId]="0" [unitId]="unitId" [cardType]="'HHcard'"></fileupload>
+        </div>
+         <div class="col-xl">
+                  <button #printAllBtton *nbIsGranted="['abilities', 'print']" nbButton
+             style="float: right;margin-right: 25px; margin-top: 5px;" (click)="printAll()">Print All</button>
+         </div>
+      </div>
+    </nb-card-body>
+</nb-card>
+
+
+
+<nb-accordion multi #accordionhouseholds>
+  <nb-accordion-item #accordionItems *ngFor="let household of selectedHHList; let i = index">
+      <nb-accordion-item-header style="font-size: 1.5rem ; margin: 10px">
+          {{ household.name }}
+      </nb-accordion-item-header>
+      <nb-accordion-item-body>
+          <nb-radio-group class="row" name="group{{i}}">
+              <nb-radio class="col-xl-2" *ngFor="let file of household.files" name="group{{i}}"
+                  [checked]="file.defaultOne">
+                  <a crossOrigin="Anonymous" href="/api/units/get_hh_images/{{household.unit_id}}/{{file.id}}/{{file.ext}}"
+                      [attr.data-lightbox]="household.id">
+                      <img src="/api/units/get_hh_images/{{household.unit_id}}/{{file.id}}/{{file.ext}}"
+                          style="width:200px ;height: 150px; margin-bottom: 10px ; " />
+                  </a>
+              </nb-radio>
+          </nb-radio-group>
+          <div class="row">
+              <div class="col-xl" *nbIsGranted="['abilities', 'print']">
+                  <button nbButton #printButtons [disabled]="household.printed" (click)="printCard(i)"
+                      [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success" nbSpinnerSize="large"
+                      nbSpinnerMessage="">Print</button>
+              </div>
+              <div class="col-xl" *nbIsGranted="['abilities', 'activate']">
+                  <button nbButton #activateButtons status="success" [disabled]="household.activated"
+                      (click)="activateCard(i)" [nbSpinner]="loadingLargeGroupActivate" nbSpinnerStatus="success"
+                      nbSpinnerSize="large" nbSpinnerMessage="">Activate</button>
+              </div>
+              <!-- <div class="col-xl" *nbIsGranted="['abilities', 'blacklist']">
+                  <button nbButton status="warning" [disabled]="household.black_listed">Blacklist</button>
+              </div>
+              <div class="col-xl " style="margin-top: 5px">
+                  <button nbButton status="danger" (click)="openWindow(i)">Edit</button>
+              </div> -->
+          </div>
+      </nb-accordion-item-body>
+  </nb-accordion-item>
+</nb-accordion>

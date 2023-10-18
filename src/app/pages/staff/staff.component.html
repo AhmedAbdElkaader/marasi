@@ -1,0 +1,69 @@
+
+
+
+<nb-card>
+  <nb-card-body>
+
+      <nb-select #selected placeholder="Select Category" shape="semi-round">
+          <nb-option value="1">Emaar Staff</nb-option>
+          <nb-option value="2">Operators</nb-option>
+          <nb-option value="3">Quality Gate</nb-option>
+          <nb-option value="4">Quality Control</nb-option>
+          <nb-option value="5">Hospitality</nb-option>
+          <nb-option value="6">VIP</nb-option>
+      </nb-select>
+
+    </nb-card-body>
+  </nb-card>
+
+
+ 
+  <nb-card>
+      <nb-card-body class="example-items-col">
+        <h6 hidden #title>Title</h6>
+        <input  hidden type="text" nbInput  fieldSize="large"  #titleBox value="{{ selectedTitle }}"><br><br>
+        <button *ngIf="selectedTitle" nbButton  (click)="Next()" >Next</button><br><br>
+      </nb-card-body>
+  </nb-card>
+
+  <nb-card *ngIf="show2">
+    <nb-card-body>
+        <fileupload  [rentalId]="0" [unitId]="selectedIndexList" [cardType]="'staff'" [title]="selectedTitle"></fileupload>
+    </nb-card-body>
+  </nb-card>
+    
+   <nb-card>
+      <nb-card-body>
+        <nb-tabset fullWidth>
+            <nb-tab nbSpinnerSize="xxlarge" tabTitle="{{staffTitle.name}}" *ngFor="let staffTitle of staffData ; let i = index">
+                <nb-accordion>
+                    <nb-accordion-item *ngFor="let staffName of staffTitle.staff ; let d = index">
+                     <nb-accordion-item-header>
+                        <li>{{staffName.name}}</li>
+                     </nb-accordion-item-header>
+                     <nb-accordion-item-body>
+                        <nb-radio class="col-xl-2" *ngFor="let file of staffName.files" name="group{{i}}" [checked]="file.defaultOne">
+                          <a crossOrigin="Anonymous" href="/api/staff/get_images/{{ staffTitle.id }}/{{file.id}}/{{file.ext}}" [attr.data-lightbox]="file.id">
+                            <img src="/api/staff/get_images/{{ staffTitle.id }}/{{file.id}}/{{file.ext}}"style="width:200px ;height: 150px; margin-bottom: 10px ; " />
+                          </a>
+                       </nb-radio>
+                       <div class="row">
+                       <div class="col-xl-2" style="margin-left: 20px" *nbIsGranted="['abilities', 'print']">
+                        <button nbButton #printButtons [disabled]="staffName.printed" (click)="printCard(i, d)"
+                            [nbSpinner]="loadingLargeGroup" nbSpinnerStatus="success" nbSpinnerSize="large"
+                            nbSpinnerMessage="">Print</button>
+                       </div>
+                       <div class="col-xl" *nbIsGranted="['abilities', 'activate']">
+                          <button nbButton #activateButtons status="success" [disabled]="staffName.activated"
+                              (click)="activateCard(i, d)" [nbSpinner]="loadingLargeGroupActivate" nbSpinnerStatus="success"
+                              nbSpinnerSize="large" nbSpinnerMessage="">Activate</button>
+                      </div>
+                    </div>
+                    </nb-accordion-item-body>
+                    </nb-accordion-item>
+                   </nb-accordion>
+            </nb-tab>
+        </nb-tabset>
+     </nb-card-body>
+   </nb-card> 
+   
